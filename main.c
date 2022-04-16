@@ -16,7 +16,7 @@ struct Node *insert(struct Node *root, int data);
 void printInOrder(struct Node *root);
 struct Node *delete(struct Node *root, int data);
 int findParent(struct Node *root, int data);
-int *parse_line(char *line, int *numInts);
+int *stringToInt(char *line, int *numInts);
 
 int main(int argc, char *argv[]) {
     struct Node *root = NULL;
@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
                 char *result = arg+1; // removes first character
                 result[strlen(result)-2] = '\0';
                 int numIntsExtracted = 0;
-                int *array = parse_line(result, &numIntsExtracted);
+                int *array = stringToInt(result, &numIntsExtracted);
 
                 for (int j = 0; j < numIntsExtracted; ++j) {
                     root = insert(root, array[j]);
@@ -67,7 +67,7 @@ int main(int argc, char *argv[]) {
             }
         }else if(strcmp(command, "INSERT")==0){
             int numIntsExtracted = 0;
-            int *array = parse_line(arg, &numIntsExtracted);
+            int *array = stringToInt(arg, &numIntsExtracted);
             root = insert(root, array[0]);
             
         }else if(strcmp(command, "LIST")==0){
@@ -75,7 +75,7 @@ int main(int argc, char *argv[]) {
             printf("\n");
         }else if(strcmp(command, "PARENT")==0){
             int numIntsExtracted = 0;
-            int *array = parse_line(arg, &numIntsExtracted);
+            int *array = stringToInt(arg, &numIntsExtracted);
             int parent = findParent(root, array[0]);
             if(parent==-1){
                 printf("IS ROOT\n");
@@ -84,7 +84,7 @@ int main(int argc, char *argv[]) {
             }
         }else if(strcmp(command, "DELETE")==0){
             int numIntsExtracted = 0;
-            int *array = parse_line(arg, &numIntsExtracted);
+            int *array = stringToInt(arg, &numIntsExtracted);
             root = delete(root, array[0]);
         }else{
             printf("Invalid command\n");
@@ -95,7 +95,7 @@ int main(int argc, char *argv[]) {
 }
 
 //function returns integer array
-int *parse_line(char *line, int *numInts) {
+int *stringToInt(char *line, int *numInts) {
     char sNumArray[MAX_SIZE];
     strcpy(sNumArray, line);
     int *numbers = (int *) malloc(sizeof(int) * MAX_SIZE);
