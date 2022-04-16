@@ -28,8 +28,7 @@ int main(int argc, char *argv[]) {
         char arg[MAX_SIZE];
 
         fgets(input, sizeof input, stdin);
-        if(strchr(input, ' ') != NULL)
-        {
+        if(strchr(input, ' ') != NULL){
             char *token = strtok(input, " ");
             int i = 0;
             while (token != NULL) {
@@ -37,7 +36,6 @@ int main(int argc, char *argv[]) {
                     strcpy(command, token);
                 }else if(i==1){
                     strcpy(arg,token);
-                    
                 }
                 i++;
                 token = strtok(NULL, " ");
@@ -94,7 +92,6 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-//function returns integer array
 int *stringToInt(char *line, int *numInts) {
     char sNumArray[MAX_SIZE];
     strcpy(sNumArray, line);
@@ -108,7 +105,6 @@ int *stringToInt(char *line, int *numInts) {
             break;
         }       
     }
-
     return numbers;
 }
 
